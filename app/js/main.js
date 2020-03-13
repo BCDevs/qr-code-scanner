@@ -89,9 +89,8 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 
     QRReader.scan(result => {
-      copiedText = result;
-      textBoxEle.value = result;
-      textBoxEle.select();
+      let data = JSON.parse(result);
+      textBoxEle.innerHTML=`Name: ${data.name}</br>Age:${data.age}`
       scanningEle.style.display = 'none';
       if (isURL(result)) {
         dialogOpenBtnElement.style.display = 'inline-block';
@@ -105,9 +104,6 @@ window.addEventListener('DOMContentLoaded', () => {
 
   //Hide dialog
   function hideDialog() {
-    copiedText = null;
-    textBoxEle.value = '';
-
     if (!window.isMediaStreamAPISupported) {
       frame.src = '';
       frame.className = '';
