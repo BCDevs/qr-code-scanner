@@ -90,7 +90,20 @@ window.addEventListener('DOMContentLoaded', () => {
 
     QRReader.scan(result => {
       let data = JSON.parse(result);
-      textBoxEle.innerHTML=`Name: ${data.name}</br>Age:${data.age}`
+      if (typeof data.CropUID ==="undefined"){
+        alert("Invalid Qr Code.. Only Food Supplychain Qr is Scannable..") 
+        return;
+      }
+      textBoxEle.innerHTML=` Unit Id: ${data.UnitId}</br>Product Name: ${data.ProductName}</br>
+      Category:${data.Category}</br>Price:${data.Price}</br>
+      Crop UID:${data.CropUID}</br>Crop Origin: ${data.CropOrigin}</br> 
+      Farmer: ${data.Farmer}</br>Farmer Certificate: ${data.FarmerCertificateHash}</br>
+      Mfg.Date:${data.MfgDate}</br>Production Id: ${data.ProductionId}</br>
+      Expiry Date:${data.ExpiryDate}</br>Manufactured By:${data.ManufacturedBy}</br>
+      Manufacturer Address: ${data.ManufacturerAddress}</br>Manufacturer Id:${data.ManufacturerId}</br>
+      Fssai Id: ${data.FssaiId}</br>Retailed By: ${data.Retailer}</br>
+      Retailer Address:${data.RetailerAddress}</br>Distributed By:${data.Distributor}</br>
+      Distributor Address:${data.DistributorAddress}</br>Distributor Id:${data.DistributorId}</br>`
       scanningEle.style.display = 'none';
       if (isURL(result)) {
         dialogOpenBtnElement.style.display = 'inline-block';
